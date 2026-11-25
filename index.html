@@ -231,10 +231,14 @@ function sched(){while(nextT<AC.currentTime+.3){const q=step%32,c=CH[Math.floor(
   if(i%4===0)tone(mG,"sine",120,t,.002,.14,.32,45);
   if(i%2===1)noise(mG,t,.04,.04,6000);
   nextT+=SP;step++}}
-/* >>> DÁN LINK NHẠC (.mp3) VÀO ĐÂY <<< */
-const MUSIC_URL="https://drive.google.com/uc?export=download&id=18WmhW2ar62BemAnptKh4DU8y6wLzwZkR";
-const bgm=MUSIC_URL?new Audio(MUSIC_URL):null;if(bgm){bgm.loop=true;bgm.volume=.5}
-function startMusic(){if(bgm){bgm.play().catch(()=>{});return}if(timer)return;nextT=AC.currentTime+.1;timer=setInterval(sched,100)}
+/* >>> LINK NHẠC: thử lần lượt từng link, hỏng hết thì dùng nhạc tổng hợp <<< */
+const MUSIC_URLS=["https://files.catbox.moe/bxwm4d.mp3"];
+let bi=0,bgmFail=false,started=false;
+const bgm=new Audio();bgm.loop=true;bgm.volume=.5;bgm.preload="auto";bgm.src=MUSIC_URLS[0];
+function synthStart(){if(timer||!AC)return;nextT=AC.currentTime+.1;timer=setInterval(sched,100)}
+function bgmNext(){if(bi<MUSIC_URLS.length-1){bi++;bgm.src=MUSIC_URLS[bi];if(soundOn&&started)bgm.play().catch(()=>{})}else{bgmFail=true;if(soundOn&&started)synthStart()}}
+bgm.addEventListener("error",bgmNext);
+function startMusic(){started=true;if(bgmFail){synthStart();return}bgm.play().catch(()=>{})}
 document.addEventListener("visibilitychange",()=>{if(bgm){document.hidden?bgm.pause():(soundOn&&!document.getElementById("intro")&&startMusic())}if(!AC)return;document.hidden?AC.suspend():AC.resume()});
 document.addEventListener("click",e=>{if(e.target.closest("button")&&e.target.id!=="snd")sfx("tap")},true);
 snd.onclick=()=>{initAudio();soundOn=!soundOn;try{localStorage.setItem("dd_sound",soundOn?"1":"0")}catch(e){}applySound();if(soundOn){AC.resume();startMusic();sfx("tick")}else if(bgm)bgm.pause()};

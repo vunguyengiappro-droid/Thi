@@ -184,6 +184,58 @@ input[type=checkbox]:active{transform:scale(.8)}
 @media (max-width:430px){.tabs button{padding:9px 8px;font-size:11.5px;letter-spacing:0}}
 #list{min-height:0}
 @media (prefers-reduced-motion:reduce){#list.anim .day,#home>*{animation:none}html{scroll-behavior:auto}}
+
+/* ===== NÂNG CẤP: chip môn, chữ câu, ô tích ===== */
+/* --- Chip tên môn --- */
+.chip{
+  font-family:"Montserrat","Be Vietnam Pro",sans-serif;
+  font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  padding:5px 11px 4px;border-radius:999px;margin-right:0;vertical-align:baseline;
+  line-height:1.2;
+  background-image:linear-gradient(180deg,rgba(255,255,255,.30) 0%,rgba(255,255,255,0) 62%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 -1px 0 rgba(0,0,0,.18),0 6px 14px -6px rgba(0,0,0,.65);
+  text-shadow:0 1px 1px rgba(0,0,0,.25)
+}
+/* --- Chữ nội dung câu --- */
+label.t{padding:12px 0;align-items:center;gap:13px}
+label.t span.tx{
+  display:flex;flex-wrap:wrap;align-items:center;gap:5px 9px;min-width:0;flex:1;
+  font-family:"Lexend","Be Vietnam Pro",sans-serif;font-weight:400;font-size:14.5px;
+  line-height:1.5;letter-spacing:-.005em;font-variant-numeric:tabular-nums;
+  color:var(--tx);overflow-wrap:anywhere;text-wrap:pretty;
+  transition:color .3s,opacity .3s
+}
+label.t.c span.tx{
+  color:var(--mu);font-weight:300;
+  text-decoration-thickness:1.5px;
+  text-decoration-color:color-mix(in srgb,var(--mu) 55%,transparent)
+}
+label.t.c .chip{opacity:.5;filter:saturate(.6)}
+/* --- Ô tích --- */
+input[type=checkbox]{
+  width:26px;height:26px;border-radius:9px;margin:0;
+  border:1.5px solid color-mix(in srgb,var(--tx) 22%,transparent);
+  background:linear-gradient(145deg,color-mix(in srgb,var(--tx) 9%,transparent),color-mix(in srgb,var(--tx) 3%,transparent));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 4px 10px -4px rgba(0,0,0,.45);
+  transition:background .25s,border-color .25s,box-shadow .3s var(--ease),transform .25s var(--ease)
+}
+@media (hover:hover){
+  input[type=checkbox]:hover{border-color:var(--ok);box-shadow:0 0 0 4px color-mix(in srgb,var(--ok) 16%,transparent)}
+}
+input[type=checkbox]::after{
+  content:"";width:15px;height:15px;margin:0;border:0;
+  background:#fff;
+  transform:scale(0) rotate(-20deg);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.6 4.6L19 7.4'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.6 4.6L19 7.4'/%3E%3C/svg%3E") center/contain no-repeat;
+  transition:transform .35s var(--ease)
+}
+input[type=checkbox]:checked{
+  background:linear-gradient(145deg,#4ade80 0%,#10b981 55%,#059669 100%);
+  border-color:transparent;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 0 0 4px color-mix(in srgb,#10b981 18%,transparent),0 8px 18px -4px rgba(16,185,129,.75)
+}
+input[type=checkbox]:checked::after{transform:scale(1) rotate(0)}
 </style>
 </head>
 <body>

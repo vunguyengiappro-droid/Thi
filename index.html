@@ -236,12 +236,42 @@ input[type=checkbox]:checked{
   box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 0 0 4px color-mix(in srgb,#10b981 18%,transparent),0 8px 18px -4px rgba(16,185,129,.75)
 }
 input[type=checkbox]:checked::after{transform:scale(1) rotate(0)}
+#snd{width:48px;height:48px;padding:0;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:linear-gradient(145deg,var(--g1),var(--g2));color:#fff;overflow:visible;box-shadow:0 10px 24px -6px rgba(124,131,255,.8),0 24px 46px -14px rgba(147,51,234,.65),inset 0 1px 0 rgba(255,255,255,.5),inset 0 -3px 6px rgba(0,0,0,.22);transition:transform .3s var(--ease),box-shadow .3s,filter .3s}
+#snd svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 2px 3px rgba(0,0,0,.45))}
+#snd::before{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--g2);opacity:0;animation:rip 2s infinite;pointer-events:none}
+@keyframes rip{0%{transform:scale(.85);opacity:.7}100%{transform:scale(1.4);opacity:0}}
+#snd:not(.off) svg{animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-2px) rotate(-7deg)}}
+#snd .sl{opacity:0;transition:opacity .25s}
+#snd.off .sl{opacity:1}
+#snd.off::before{display:none}
+#snd.off{filter:grayscale(.9) brightness(.85);box-shadow:0 6px 14px -6px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.25)}
+/* ===== SÁNG: kính trong suốt (glass) ===== */
+html:root[data-theme="light"]{--bg:#e9eeff;--card:rgba(255,255,255,.5);--bd:rgba(255,255,255,.8);--dock:rgba(255,255,255,.58);--exbg:rgba(255,228,236,.55);--hl:rgba(224,228,255,.6);--mu:#5d6788;--sh:0 10px 34px -8px rgba(49,60,150,.18)}
+html:root[data-theme="light"] body::before{background:radial-gradient(50% 38% at 8% 0%,rgba(99,102,241,.38),transparent 70%),radial-gradient(44% 34% at 100% 14%,rgba(236,72,153,.24),transparent 70%),radial-gradient(60% 40% at 55% 100%,rgba(56,189,248,.32),transparent 70%),linear-gradient(180deg,#eef2ff,#f6f1ff)}
+html:root[data-theme="light"] .tile,html:root[data-theme="light"] .box,html:root[data-theme="light"] .day,html:root[data-theme="light"] .cd,html:root[data-theme="light"] .tabs,html:root[data-theme="light"] #snd.off{-webkit-backdrop-filter:blur(20px) saturate(1.7);backdrop-filter:blur(20px) saturate(1.7)}
+html:root[data-theme="light"] .tile,html:root[data-theme="light"] .box,html:root[data-theme="light"] .day,html:root[data-theme="light"] .cd{background-color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.85);box-shadow:0 12px 36px -10px rgba(49,60,150,.22),0 2px 6px rgba(49,60,150,.06),inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.35)}
+@media (hover:hover){html:root[data-theme="light"] .day:hover,html:root[data-theme="light"] .tile:hover,html:root[data-theme="light"] .box:hover{box-shadow:0 22px 50px -12px rgba(79,70,229,.32),0 4px 10px rgba(49,60,150,.08),inset 0 1px 0 #fff}}
+html:root[data-theme="light"] .day.today{background-color:rgba(224,228,255,.6);box-shadow:0 0 0 1.5px var(--g1),0 16px 44px -10px rgba(79,70,229,.4),inset 0 1px 0 #fff}
+html:root[data-theme="light"] .day.exam{background-color:rgba(255,226,235,.55);box-shadow:0 0 0 1px rgba(225,29,72,.3),0 16px 40px -14px rgba(225,29,72,.35),inset 0 1px 0 #fff}
+html:root[data-theme="light"] .dc{background:rgba(255,255,255,.6);box-shadow:inset 0 1px 0 #fff,0 4px 10px -4px rgba(49,60,150,.15)}
+html:root[data-theme="light"] .day.exam .dc{background:var(--ex)}html:root[data-theme="light"] .day.today .dc{background:linear-gradient(135deg,var(--g1),var(--g2))}
+html:root[data-theme="light"] .un{background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.9);box-shadow:inset 0 1px 0 #fff,0 6px 16px -8px rgba(49,60,150,.2)}
+html:root[data-theme="light"] .un.sec{border-color:color-mix(in srgb,var(--ac) 50%,#fff)}
+html:root[data-theme="light"] .srow .bar,html:root[data-theme="light"] .jrb{background:rgba(99,102,241,.13);box-shadow:inset 0 1px 2px rgba(49,60,150,.12)}
+html:root[data-theme="light"] .tabs{background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.9);box-shadow:0 18px 44px -12px rgba(49,60,150,.3),inset 0 1px 0 #fff}
+html:root[data-theme="light"] .tabs button:not(.on){color:#5d6788}
+html:root[data-theme="light"] input[type=checkbox]{background:rgba(255,255,255,.7);border:1.5px solid rgba(99,102,241,.3);box-shadow:inset 0 1px 0 #fff,0 4px 10px -4px rgba(49,60,150,.25)}
+html:root[data-theme="light"] input[type=checkbox]:checked{border-color:transparent}
+html:root[data-theme="light"] label.t{border-top-color:rgba(99,102,241,.1)}
+html:root[data-theme="light"] .foot button{background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.9);box-shadow:0 8px 20px -8px rgba(49,60,150,.25),inset 0 1px 0 #fff;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+html:root[data-theme="light"] .hero{border:1px solid rgba(255,255,255,.7);box-shadow:0 26px 60px -20px rgba(79,70,229,.5),inset 0 1px 0 rgba(255,255,255,.5)}
 </style>
 </head>
 <body>
 <canvas id="fx3d"></canvas>
 <div id="intro"><video class="introvid" id="introVid" src="https://files.catbox.moe/ygjuo5.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture></video><div class="introshade"></div><div class="ie">K71LKT-A • HK I 2026–2027</div><h2 id="it"></h2><div class="ic" id="ic"></div><div class="ih">Chạm để bắt đầu 🎧</div></div>
-<button id="snd" aria-label="Bật/tắt âm thanh">🔊</button>
+<button id="snd" aria-label="Bật/tắt nhạc"><svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/><path class="sl" d="M3 3l18 18"/></svg></button>
 <div class="wrap">
 <div id="home">
 <header class="hero">
@@ -373,7 +403,7 @@ let AC=null,mG,sG,soundOn=true,timer=null,nextT=0,step=0;
 try{soundOn=localStorage.getItem("dd_sound")!=="0"}catch(e){}
 const mtof=m=>440*Math.pow(2,(m-69)/12);
 function initAudio(){if(AC)return;AC=new(window.AudioContext||window.webkitAudioContext)();mG=AC.createGain();sG=AC.createGain();mG.connect(AC.destination);sG.connect(AC.destination);applySound()}
-function applySound(){if(typeof bgm!=="undefined"&&bgm)bgm.muted=!soundOn;if(!AC)return;mG.gain.setTargetAtTime(soundOn?.55:0,AC.currentTime,.05);sG.gain.setTargetAtTime(soundOn?.7:0,AC.currentTime,.05);snd.textContent=soundOn?"🔊":"🔇"}
+function applySound(){if(typeof bgm!=="undefined"&&bgm)bgm.muted=!soundOn;if(!AC)return;mG.gain.setTargetAtTime(soundOn?.55:0,AC.currentTime,.05);sG.gain.setTargetAtTime(soundOn?.7:0,AC.currentTime,.05);snd.classList.toggle("off",!soundOn)}
 function tone(dest,type,f,t,a,d,v,fe){const o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.setValueAtTime(f,t);if(fe)o.frequency.exponentialRampToValueAtTime(fe,t+a+d);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v,t+a);g.gain.exponentialRampToValueAtTime(.0001,t+a+d);o.connect(g);g.connect(dest);o.start(t);o.stop(t+a+d+.05)}
 function noise(dest,t,d,v,hp){const n=Math.floor(AC.sampleRate*d),b=AC.createBuffer(1,n,AC.sampleRate),x=b.getChannelData(0);for(let i=0;i<n;i++)x[i]=Math.random()*2-1;const s2=AC.createBufferSource(),fl=AC.createBiquadFilter(),g=AC.createGain();s2.buffer=b;fl.type="highpass";fl.frequency.value=hp;g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);s2.connect(fl);fl.connect(g);g.connect(dest);s2.start(t)}
 function sfx(k){if(!AC||!soundOn)return;const t=AC.currentTime;
@@ -398,7 +428,7 @@ function sched(){while(nextT<AC.currentTime+.3){const q=step%32,c=CH[Math.floor(
   if(i%2===1)noise(mG,t,.04,.04,6000);
   nextT+=SP;step++}}
 /* >>> LINK NHẠC: thử lần lượt từng link, hỏng hết thì dùng nhạc tổng hợp <<< */
-const MUSIC_URLS=["https://files.catbox.moe/bxwm4d.mp3"];
+const MUSIC_URLS=["https://files.catbox.moe/5hqhfa.mp3","https://files.catbox.moe/83zo1c.mp3","https://files.catbox.moe/hlihed.mp3","https://files.catbox.moe/xksuv1.mp3","https://files.catbox.moe/mhuzep.mp3"];
 let bi=0,bgmFail=false,started=false;
 const hv=document.getElementById("heroVid");
 if(hv){hv.muted=true;hv.defaultMuted=true;hv.loop=true;
@@ -413,9 +443,13 @@ const pi=()=>{if(iv.paused)iv.play().catch(()=>{})};
 pi();iv.addEventListener("loadeddata",pi);iv.addEventListener("canplay",pi);
 ["click","touchstart"].forEach(e=>document.addEventListener(e,pi,{passive:true}));
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)pi()})}
-const bgm=new Audio();bgm.loop=true;bgm.volume=.5;bgm.preload="auto";bgm.src=MUSIC_URLS[0];
+const bgm=new Audio();bgm.loop=false;bgm.volume=.5;bgm.preload="auto";let fails=0;
+function pick(){let n;do{n=Math.floor(Math.random()*MUSIC_URLS.length)}while(n===bi&&MUSIC_URLS.length>1);bi=n;bgm.src=MUSIC_URLS[n]}
+pick();
+bgm.addEventListener("ended",()=>{pick();bgm.play().catch(()=>{})});
+bgm.addEventListener("playing",()=>{fails=0});
 function synthStart(){if(timer||!AC)return;nextT=AC.currentTime+.1;timer=setInterval(sched,100)}
-function bgmNext(){if(bi<MUSIC_URLS.length-1){bi++;bgm.src=MUSIC_URLS[bi];if(soundOn&&started)bgm.play().catch(()=>{})}else{bgmFail=true;if(soundOn&&started)synthStart()}}
+function bgmNext(){if(++fails<MUSIC_URLS.length*2){pick();if(soundOn&&started)bgm.play().catch(()=>{})}else{bgmFail=true;if(soundOn&&started)synthStart()}}
 bgm.addEventListener("error",bgmNext);
 function startMusic(){started=true;if(bgmFail){synthStart();return}bgm.play().catch(()=>{})}
 document.addEventListener("visibilitychange",()=>{if(bgm){document.hidden?bgm.pause():(soundOn&&!document.getElementById("intro")&&startMusic())}if(!AC)return;document.hidden?AC.suspend():AC.resume()});
@@ -426,7 +460,7 @@ snd.onclick=()=>{initAudio();soundOn=!soundOn;try{localStorage.setItem("dd_sound
 (()=>{const ex=days.filter(d=>d.exam&&d.date>=todayS)[0];
   if(ex){const n=Math.round((new Date(ex.date+"T00:00:00")-new Date(todayS+"T00:00:00"))/864e5);ic.textContent=n===0?"⏰ Hôm nay có thi!":"⏳ Môn thi kế tiếp còn "+n+" ngày"}else ic.textContent="🎉 Chúc bạn thi tốt!"})();
 intro.onclick=()=>{initAudio();AC.resume();applySound();rev();if(soundOn)startMusic();intro.classList.add("go");setTimeout(()=>intro.remove(),1000)};
-snd.textContent=soundOn?"🔊":"🔇";
+snd.classList.toggle("off",!soundOn);
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>

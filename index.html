@@ -574,15 +574,24 @@ snd.onclick=()=>{initAudio();soundOn=!soundOn;try{localStorage.setItem("dd_sound
 (()=>{const ex=days.filter(d=>d.exam&&d.date>=todayS)[0];
   if(ex){const n=Math.round((new Date(ex.date+"T00:00:00")-new Date(todayS+"T00:00:00"))/864e5);ic.textContent=n===0?"⏰ Hôm nay có thi!":"⏳ Môn thi kế tiếp còn "+n+" ngày"}else ic.textContent="🎉 Chúc bạn thi tốt!"})();
 /* âm thanh màn hình tải: chỉ lấy 3,5 giây đầu */
-var ldAud=new Audio("https://files.catbox.moe/4emkvp.mp3"),ldCut=3.5,ldStarted=false;
+var ldAud=new Audio("https://files.catbox.moe/i7yrds.mp3"),ldCut=3,ldStarted=false;
 ldAud.preload="auto";ldAud.volume=.85;ldAud.muted=!soundOn;
 function ldPlay(){if(ldStarted||ldReady||!soundOn)return;ldAud.currentTime=0;const pr=ldAud.play();
  if(pr&&pr.then)pr.then(()=>{ldStarted=true}).catch(()=>{});else ldStarted=true}
 ldAud.addEventListener("timeupdate",()=>{const t=ldAud.currentTime;
  if(t>=ldCut){ldAud.pause()}else if(t>ldCut-.5){ldAud.volume=Math.max(0,(ldCut-t)/.5*.85)}});
 var ldReady=false;
-var ldBegun=false;function ldBegin(){ldBegun=true;ldt.textContent="ĐANG TẢI";ldw.classList.remove("wait");ldPlay();const t0=performance.now(),D=3000;
- function f(now){const k=Math.min(1,(now-t0)/D),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2,v=Math.round(e*100);
+var ldBegun=false,ldOn=false,ldEnded=false;
+ldAud.addEventListener("playing",()=>{ldOn=true});
+ldAud.addEventListener("ended",()=>{ldEnded=true});
+ldAud.addEventListener("loadedmetadata",()=>{if(isFinite(ldAud.duration)&&ldAud.duration>0)ldCut=Math.min(ldAud.duration,3)});
+function ldBegin(){ldBegun=true;ldt.textContent="ĐANG TẢI";ldw.classList.remove("wait");ldPlay();
+ let t0=null,prev=0;const w0=performance.now();
+ function f(now){
+  if(t0===null){if(ldOn||!soundOn||now-w0>1200)t0=now;else{requestAnimationFrame(f);return}}
+  const ct=ldOn?ldAud.currentTime:(now-t0)/1000;
+  if(ldOn&&!ldAud.paused){if(ct>=ldCut)ldAud.pause();else if(ct>ldCut-.5)ldAud.volume=Math.max(0,(ldCut-ct)/.5*.85)}
+  const k=Math.min(1,Math.max(prev,ldEnded?1:ct/ldCut)),v=Math.round(k*100);prev=k;
   ldp.textContent=v;ldf.style.width=v+"%";
   if(k<1)requestAnimationFrame(f);else{ldReady=true;ldw.classList.add("done");ldt.textContent="SẴN SÀNG"}}
  requestAnimationFrame(f)}

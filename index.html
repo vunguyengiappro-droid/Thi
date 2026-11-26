@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Điểm danh ôn thi K71LKT-A</title>
+<link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Montserrat:wght@500;600;700;800&family=Lexend:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f3f4fa;--card:#ffffff;--tx:#161a2b;--mu:#6c7490;--bd:#e6e8f2;--ok:#16a34a;--ex:#e11d48;--exbg:#fff1f4;--hl:#eef0ff;--g1:#4f46e5;--g2:#9333ea;--sh:0 8px 30px rgba(40,50,110,.08);
@@ -341,6 +342,20 @@ html:root[data-theme="light"] .srow .bar{background:color-mix(in srgb,var(--c) 1
 #intro .ih{margin-top:44px;display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border-radius:999px;font:700 12.5px/1 "Montserrat","Be Vietnam Pro",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:linear-gradient(135deg,#6366f1,#a855f7);text-shadow:0 0 10px rgba(255,255,255,.75);animation:ihin .8s 1.5s both,hintp 2s 2.3s ease-in-out infinite}
 @media (prefers-reduced-motion:reduce){#intro::after,#intro h2,#intro .ih{animation:none}}
 #intro .ih{visibility:hidden}
+#intro::after{background:radial-gradient(closest-side,rgba(255,255,255,.16),rgba(120,125,150,.1) 48%,transparent 72%)}
+#intro .neb{position:absolute;inset:-10%;z-index:0;pointer-events:none;mix-blend-mode:screen;background:radial-gradient(40% 30% at 20% 22%,rgba(120,70,255,.30),transparent 70%),radial-gradient(36% 28% at 84% 68%,rgba(40,150,255,.24),transparent 70%),radial-gradient(30% 24% at 74% 16%,rgba(255,80,190,.18),transparent 70%),radial-gradient(46% 30% at 22% 86%,rgba(60,90,255,.22),transparent 70%);animation:nebd 16s ease-in-out infinite alternate}
+@keyframes nebd{from{transform:translate3d(-2%,-1%,0) scale(1)}to{transform:translate3d(2%,2%,0) scale(1.1)}}
+#intro .bh{position:absolute;left:0;top:0;width:0;height:0;z-index:0;pointer-events:none;opacity:0;will-change:transform,width,height}
+#intro .bh .bhb{position:absolute;left:50%;top:50%;width:300%;height:300%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,0) 26%,rgba(240,244,255,.32) 36%,rgba(170,180,255,.12) 62%,transparent 100%)}
+#intro .bh .bhc{position:absolute;inset:-12%;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,8,.92) 0,rgba(0,0,8,.7) 50%,rgba(0,0,8,0) 100%)}
+#intro .ldw{position:absolute;left:0;right:0;margin:0 auto;bottom:calc(8vh + env(safe-area-inset-bottom,0px));width:min(260px,68vw);z-index:1;text-align:center;font-family:"Montserrat","Be Vietnam Pro",sans-serif;animation:ihin .8s .3s both}
+#intro .ldw small{display:block;font-size:10px;font-weight:600;letter-spacing:.3em;color:#d6dbff;opacity:.85;margin-bottom:6px;text-shadow:0 0 12px rgba(124,131,255,.9)}
+#intro .ldn{font:300 44px/1 "Lexend","Montserrat",sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:#fff;text-shadow:0 0 18px rgba(167,139,250,.8);margin-bottom:12px}
+#intro .ldn span{font-size:18px;margin-left:3px;opacity:.7}
+#intro .ldb{height:4px;border-radius:4px;background:rgba(255,255,255,.18);overflow:hidden}
+#intro .ldb i{display:block;height:100%;width:0;border-radius:4px;background:linear-gradient(90deg,#7c83ff,#c084fc,#38bdf8);box-shadow:0 0 12px #a78bfa,0 0 24px rgba(124,131,255,.7)}
+#intro .ldw.done small{animation:pulse 1.4s ease-in-out infinite}
+#intro .ldw.done .ldn{text-shadow:0 0 26px rgba(196,181,253,1),0 0 50px rgba(99,102,241,.8)}
 button,label.t,#intro,input[type=checkbox]{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 /* nút nhạc nhỏ gọn ở góc */
 #snd{width:32px;height:32px;right:10px;top:calc(10px + env(safe-area-inset-top,0px));opacity:.85;box-shadow:0 0 12px 0 rgba(147,51,234,.5),0 6px 14px -6px rgba(124,131,255,.7),inset 0 1px 0 rgba(255,255,255,.45)}
@@ -350,7 +365,7 @@ button,label.t,#intro,input[type=checkbox]{touch-action:manipulation;-webkit-tap
 </head>
 <body>
 <canvas id="fx3d"></canvas>
-<div id="intro"><video class="introvid" id="introVid" src="https://files.catbox.moe/ygjuo5.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture></video><div class="introshade"></div><div class="ie">K71LKT-A • HK I 2026–2027</div><h2 id="it"></h2><div class="ic" id="ic"></div><div class="ih">Chạm để bắt đầu 🎧</div></div>
+<div id="intro"><video class="introvid" id="introVid" src="https://files.catbox.moe/ygjuo5.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture></video><div class="introshade"></div><div class="neb"></div><div class="bh" id="bh"><b class="bhb"></b><i class="bhc"></i></div><div class="ie">K71LKT-A • HK I 2026–2027</div><h2 id="it"></h2><div class="ic" id="ic"></div><div class="ih">Chạm để bắt đầu 🎧</div><div class="ldw" id="ldw"><small id="ldt">ĐANG TẢI</small><div class="ldn"><b id="ldp">0</b><span>%</span></div><div class="ldb"><i id="ldf"></i></div></div></div>
 <button id="snd" aria-label="Bật/tắt nhạc"><svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/><path class="sl" d="M3 3l18 18"/></svg></button>
 <div class="wrap">
 <div id="home">
@@ -554,7 +569,13 @@ snd.onclick=()=>{initAudio();soundOn=!soundOn;try{localStorage.setItem("dd_sound
 "LỊCH THI".split("").forEach((ch,i)=>{const sp=document.createElement("span");sp.textContent=ch===" "?"\u00a0":ch;sp.style.animationDelay=(.3+i*.09)+"s";it.appendChild(sp)});
 (()=>{const ex=days.filter(d=>d.exam&&d.date>=todayS)[0];
   if(ex){const n=Math.round((new Date(ex.date+"T00:00:00")-new Date(todayS+"T00:00:00"))/864e5);ic.textContent=n===0?"⏰ Hôm nay có thi!":"⏳ Môn thi kế tiếp còn "+n+" ngày"}else ic.textContent="🎉 Chúc bạn thi tốt!"})();
-intro.onclick=()=>{initAudio();AC.resume();applySound();rev();if(soundOn)startMusic();intro.classList.add("go");setTimeout(()=>intro.remove(),1000)};
+let ldReady=false;
+(()=>{const t0=performance.now(),D=3000;
+ function f(now){const k=Math.min(1,(now-t0)/D),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2,v=Math.round(e*100);
+  ldp.textContent=v;ldf.style.width=v+"%";
+  if(k<1)requestAnimationFrame(f);else{ldReady=true;ldw.classList.add("done");ldt.textContent="SẴN SÀNG"}}
+ requestAnimationFrame(f)})();
+intro.onclick=()=>{if(!ldReady)return;initAudio();AC.resume();applySound();rev();if(soundOn)startMusic();intro.classList.add("go");setTimeout(()=>intro.remove(),1000)};
 snd.classList.toggle("off",!soundOn);
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -597,9 +618,9 @@ if(!window.THREE||matchMedia("(prefers-reduced-motion:reduce)").matches)return;
 const cv=document.getElementById("fx3d");let R;
 try{R=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:false,powerPreference:"high-performance"})}catch(e){return}
 R.setClearColor(0,0);
-const coarse=matchMedia("(pointer:coarse)").matches,NF=coarse?3200:6500,NG=coarse?2600:5600,DIST=1400,Z0=-120,V2=THREE.Vector2;
+const coarse=matchMedia("(pointer:coarse)").matches,NF=coarse?3200:6500,NG=coarse?5200:12000,DIST=1400,Z0=-120,V2=THREE.Vector2;
 const sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(40,1,10,6000);cam.position.z=DIST;
-const U={uTime:{value:0},uNdc:{value:new V2(9,9)},uPtr:{value:0},uAsp:{value:1},uTan:{value:.3},uDist:{value:DIST},uScale:{value:400},uLight:{value:0},uScroll:{value:0},uAud:{value:0},uPar:{value:new V2()},uB:{value:[0,1,2].map(()=>new THREE.Vector4(0,0,-99,0))}};
+const U={uTime:{value:0},uNdc:{value:new V2(9,9)},uPtr:{value:0},uAsp:{value:1},uTan:{value:.3},uDist:{value:DIST},uScale:{value:400},uLight:{value:0},uScroll:{value:0},uRot:{value:0},uBH:{value:0},uAud:{value:0},uPar:{value:new V2()},uB:{value:[0,1,2].map(()=>new THREE.Vector4(0,0,-99,0))}};
 const COM=`uniform float uTime,uPtr,uAsp,uTan,uDist,uScale,uLight,uScroll,uSz,uAud;uniform vec2 uNdc,uPar;uniform vec4 uB[3];varying float vA;varying vec3 vC;
 float disturb(inout vec3 p){float dp=uDist-p.z,k=dp/uDist;vec2 hf=vec2(uAsp,1.)*uTan*dp;vec2 d=p.xy-uNdc*hf;float L=length(d),Rr=200.*k;
 float f=exp(-(L*L)/(Rr*Rr))*uPtr;vec2 dir=d/max(L,1.);p.xy+=dir*f*130.*k+vec2(-dir.y,dir.x)*f*80.*k;p.z+=f*170.;
@@ -611,14 +632,14 @@ float par=.3+.7*smoothstep(-600.,500.,p.z);float cl=mod(p.y+uTime*13.*sp+uScroll
 float f=disturb(p);vec4 mv=modelViewMatrix*vec4(p,1.);gl_PointSize=uSz*sd.w*(1.+f*1.7+uAud*.9)*(uScale/max(-mv.z,1.));
 float tw=.55+.45*sin(uTime*(.7+sp*1.6)+ph*3.1);vA=clamp(tw*(.5+f*1.5+uAud*.8)*(1.-smoothstep(.72,1.,abs(cl)/900.)),0.,1.);
 vC=mix(mix(vec3(.62,.68,1.),vec3(.86,.62,1.),fract(ph*.318)),vec3(1.,.95,.8),clamp(f*1.2+uAud*.5,0.,1.));gl_Position=projectionMatrix*mv;}`;
-const VG=COM+`attribute vec4 g;uniform vec3 uGC;uniform vec2 uTilt;void main(){float r=g.x,th=g.y+uTime*.75*(1.25-r*.7);
+const VG=COM+`attribute vec4 g;uniform vec3 uGC;uniform vec2 uTilt;uniform float uRot,uBH;void main(){float r=g.x,th=g.y+uRot*.75*(1.25-r*.7);
 vec3 q=vec3(cos(th)*r,g.z*(1.-r)*.10+sin(th*3.+uTime*.7)*.01,sin(th)*r)*uGC.z*(1.+uAud*.07);
 float cx=cos(uTilt.x),sx=sin(uTilt.x);q=vec3(q.x,q.y*cx-q.z*sx,q.y*sx+q.z*cx);
 float cz=cos(uTilt.y),sz=sin(uTilt.y);q=vec3(q.x*cz-q.y*sz,q.x*sz+q.y*cz,q.z);
 vec3 p=vec3(uGC.xy,-120.)+q;p.xy-=uPar*(p.z+500.)*.03;float f=disturb(p);vec4 mv=modelViewMatrix*vec4(p,1.);
 gl_PointSize=(.9+2.4*g.w*g.w)*(1.+f*1.4+uAud*.6)*uSz*(uScale/max(-mv.z,1.));float core=1.-r;
 vA=(.35+.65*core+f*.8)*(.55+.45*sin(uTime*1.3+g.w*40.));
-vC=mix(mix(vec3(.55,.5,1.),vec3(1.,.82,.55),core*core),vec3(.5,.95,1.),smoothstep(.85,1.,g.w)*.6);gl_Position=projectionMatrix*mv;}`;
+vC=mix(mix(vec3(.55,.5,1.),vec3(1.,.82,.55),core*core),vec3(.5,.95,1.),smoothstep(.85,1.,g.w)*.6);vC=mix(vC,mix(vec3(.82,.84,.9),vec3(1.),pow(core,3.))*1.35,uBH);vA*=(1.+uBH*.8*cos(th+.4))*(1.+uBH*.7);gl_Position=projectionMatrix*mv;}`;
 const FS=`uniform float uLight,uOp;varying float vA;varying vec3 vC;void main(){float a=smoothstep(.5,0.,length(gl_PointCoord-.5));a*=a;
 vec3 c=mix(vC*(1.+a*.8),vC*vec3(.34,.30,.80),uLight);gl_FragColor=vec4(c,a*vA*uOp*mix(1.,.8,uLight));}`;
 const mk=(vs,u)=>new THREE.ShaderMaterial({uniforms:Object.assign({uOp:{value:.8}},U,u),vertexShader:vs,fragmentShader:FS,transparent:true,depthWrite:false,depthTest:false,blending:THREE.AdditiveBlending});
@@ -629,7 +650,11 @@ fg.setAttribute("position",new THREE.BufferAttribute(fp,3));fg.setAttribute("sd"
 const gd=new Float32Array(NG*4);for(let i=0;i<NG;i++){const r=.17+.83*Math.pow(Math.random(),.72);gd.set([r,(Math.random()*3|0)*2.0944+r*3.6+(Math.random()-.5)*.42*(1-r*.5),Math.random()*2-1,Math.random()],i*4)}
 const gg=new THREE.BufferGeometry();gg.setAttribute("position",new THREE.BufferAttribute(new Float32Array(NG*3),3));gg.setAttribute("g",new THREE.BufferAttribute(gd,4));
 const pf=new THREE.Points(fg,mf),pg=new THREE.Points(gg,mg);pf.frustumCulled=pg.frustumCulled=false;sc.add(pf,pg);
-function fill(){const W=innerWidth;for(let i=0;i<NF;i++){const z=-600+Math.random()*1100;fp[i*3]=(Math.random()*2-1)*W/2*(DIST-z)/DIST*1.12;fp[i*3+1]=(Math.random()-.5)*1800;fp[i*3+2]=z}fg.attributes.position.needsUpdate=true}
+const NF2=coarse?3500:7500,fp2=new Float32Array(NF2*3),fs2=new Float32Array(NF2*4),fg2=new THREE.BufferGeometry();
+for(let i=0;i<NF2;i++)fs2.set([Math.random()*6.283,.15+Math.random()*.7,.4+Math.random()*1.4,.5+.9*Math.pow(Math.random(),2.6)],i*4);
+fg2.setAttribute("position",new THREE.BufferAttribute(fp2,3));fg2.setAttribute("sd",new THREE.BufferAttribute(fs2,4));
+const mf2=mk(VF,{uSz:{value:7}}),pf2=new THREE.Points(fg2,mf2);pf2.frustumCulled=false;sc.add(pf2);
+function fill(){const W=innerWidth;for(let i=0;i<NF;i++){const z=-600+Math.random()*1100;fp[i*3]=(Math.random()*2-1)*W/2*(DIST-z)/DIST*1.12;fp[i*3+1]=(Math.random()-.5)*1800;fp[i*3+2]=z}fg.attributes.position.needsUpdate=true;for(let i=0;i<NF2;i++){const z=-600+Math.random()*1100;fp2[i*3]=(Math.random()*2-1)*W/2*(DIST-z)/DIST*1.12;fp2[i*3+1]=(Math.random()-.5)*1800;fp2[i*3+2]=z}fg2.attributes.position.needsUpdate=true}
 function size(){const W=innerWidth,H=innerHeight;R.setPixelRatio(Math.min(devicePixelRatio||1,1.5));R.setSize(W,H,false);U.uAsp.value=W/H;U.uTan.value=H/2/DIST;cam.fov=2*Math.atan(H/2/DIST)*180/Math.PI;cam.aspect=W/H;cam.updateProjectionMatrix();U.uScale.value=R.getDrawingBufferSize(new V2()).y*.5}
 let rt;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(()=>{size();fill()},150)});
 /* con trỏ, chạm, nhấn: tạo sóng xung kích */
@@ -643,12 +668,15 @@ addEventListener("touchstart",e=>{tm(e);const t=e.touches[0];if(t)t0={x:t.client
 addEventListener("touchmove",tm,{passive:true});
 addEventListener("touchend",e=>{hasP=false;const t=e.changedTouches[0];if(t0&&t&&Math.hypot(t.clientX-t0.x,t.clientY-t0.y)<12&&performance.now()-t0.t<400)burst(t.clientX,t.clientY);t0=null},{passive:true});
 /* thiên hà bám theo vòng tiến độ (ở màn hình chào thì ở giữa màn hình) */
-const ring=document.querySelector(".ringwrap");let gx=innerWidth/2,gy=innerHeight/2,gr=200,go=0;
+const ring=document.querySelector(".ringwrap");let gx=innerWidth/2,gy=innerHeight/2,gr=30,go=0;
 function place(dt){const W=innerWidth,H=innerHeight,it=document.getElementById("intro");let X,Y,Rr,O;
- if(it&&!it.classList.contains("go")){X=W/2;Y=H*.45;Rr=Math.min(W,H)*.5;O=.95}
+ if(it&&!it.classList.contains("go")){X=W/2;Y=H*.45;Rr=Math.min(W,H)*.62;O=1}
  else{const b=ring.getBoundingClientRect();X=b.left+b.width/2;Y=b.top+b.height/2;Rr=Math.min(b.width*1.6,coarse?135:200);O=b.width?Math.max(0,Math.min(1,(b.bottom+30)/(b.height+90)))*1:0}
- const k=it?1-Math.pow(.012,dt):1;gx+=(X-gx)*k;gy+=(Y-gy)*k;gr+=(Rr-gr)*k;go+=(O-go)*(1-Math.pow(.01,dt));
- const f=(DIST-Z0)/DIST;mg.uniforms.uGC.value.set((gx-W/2)*f,(H/2-gy)*f,gr*f);mg.uniforms.uTilt.value.set(1+sm.y*.16,-.3+sm.x*.22);mg.uniforms.uOp.value=go;pg.visible=go>.01}
+ const I=it&&!it.classList.contains("go"),k=it?1-Math.pow(I?3e-7:.012,dt):1;gx+=(X-gx)*k;gy+=(Y-gy)*k;gr+=(Rr-gr)*k;go+=(O-go)*(1-Math.pow(I?3e-7:.01,dt));if(I){const bh=document.getElementById("bh");if(bh){const d=gr*.33;bh.style.width=bh.style.height=d+"px";bh.style.transform="translate("+(gx-d/2)+"px,"+(gy-d/2)+"px)";bh.style.opacity=go}}
+ const f=(DIST-Z0)/DIST;mg.uniforms.uGC.value.set((gx-W/2)*f,(H/2-gy)*f,gr*f);mg.uniforms.uTilt.value.set(tb0+sm.y*.16,-.3+sm.x*.22);mg.uniforms.uOp.value=go;pg.visible=go>.01}
+let tb0=1,spin=1,rot=0,szv=6.6,bhv=0;
+function spinUp(dt){const it=document.getElementById("intro"),I=it&&!it.classList.contains("go"),kk=1-Math.pow(.02,dt);
+ tb0+=((I?1.42:1)-tb0)*kk;mf2.uniforms.uOp.value=.3+.55*bhv;spin+=((I?2.4:1)-spin)*kk;szv+=((I?11:6.6)-szv)*kk;bhv+=((I?1:0)-bhv)*kk;U.uBH.value=bhv;rot+=dt*spin;mg.uniforms.uSz.value=szv;U.uRot.value=rot}
 let aE=0,an=null,ad=null;
 function aud(T,dt){let a=0;
  try{
@@ -665,10 +693,10 @@ function frame(now){requestAnimationFrame(frame);if(document.hidden){last=now;re
  const px=hasP?tx:Math.sin(T*.45)*.55,py=hasP?ty:Math.cos(T*.33)*.4,k=1-Math.pow(.0006,dt);
  sm.x+=(px-sm.x)*k;sm.y+=(py-sm.y)*k;U.uNdc.value.set(sm.x,sm.y);U.uPar.value.set(sm.x,sm.y);
  U.uPtr.value+=((hasP?1:.45)-U.uPtr.value)*(1-Math.pow(.004,dt));U.uScroll.value=window.scrollY||0;
- const L=document.documentElement.getAttribute("data-theme")==="light";
- if(L!==wasL){wasL=L;U.uLight.value=L?1:0;[mf,mg].forEach(m=>{m.blending=L?THREE.NormalBlending:THREE.AdditiveBlending;m.needsUpdate=true})}
+ const itr0=document.getElementById("intro"),L=document.documentElement.getAttribute("data-theme")==="light"&&!(itr0&&!itr0.classList.contains("go"));
+ if(L!==wasL){wasL=L;U.uLight.value=L?1:0;[mf,mf2,mg].forEach(m=>{m.blending=L?THREE.NormalBlending:THREE.AdditiveBlending;m.needsUpdate=true})}
  if(!lowed&&!document.getElementById("intro")){lowed=true;cv.classList.add("low")}
- aud(T,dt);place(dt);R.render(sc,cam)}
+ aud(T,dt);spinUp(dt);place(dt);R.render(sc,cam)}
 size();fill();requestAnimationFrame(frame);
 })();
 </script>

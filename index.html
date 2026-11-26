@@ -357,6 +357,7 @@ html:root[data-theme="light"] .srow .bar{background:color-mix(in srgb,var(--c) 1
 #intro .ldn span{font-size:18px;margin-left:3px;opacity:.7}
 #intro .ldb{height:4px;border-radius:4px;background:rgba(255,255,255,.18);overflow:hidden}
 #intro .ldb i{display:block;height:100%;width:0;border-radius:4px;background:linear-gradient(90deg,#7c83ff,#c084fc,#38bdf8);box-shadow:0 0 12px #a78bfa,0 0 24px rgba(124,131,255,.7)}
+#intro .ldw.wait small{animation:pulse 1.4s ease-in-out infinite;font-size:12px}
 #intro .ldw.done small{animation:pulse 1.4s ease-in-out infinite}
 #intro .ldw.done .ldn{text-shadow:0 0 26px rgba(196,181,253,1),0 0 50px rgba(99,102,241,.8)}
 button,label.t,#intro,input[type=checkbox]{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
@@ -368,7 +369,7 @@ button,label.t,#intro,input[type=checkbox]{touch-action:manipulation;-webkit-tap
 </head>
 <body>
 <canvas id="fx3d"></canvas>
-<div id="intro"><video class="introvid" id="introVid" src="https://files.catbox.moe/ygjuo5.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture></video><div class="introshade"></div><div class="neb"></div><div class="bh" id="bh"><b class="bhb"></b><i class="bhc"></i></div><div class="ie">K71LKT-A • HK I 2026–2027</div><h2 id="it"></h2><div class="ic" id="ic"></div><div class="ih">Chạm để bắt đầu 🎧</div><div class="ldw" id="ldw"><small id="ldt">ĐANG TẢI</small><div class="ldn"><b id="ldp">0</b><span>%</span></div><div class="ldb"><i id="ldf"></i></div></div></div>
+<div id="intro"><video class="introvid" id="introVid" src="https://files.catbox.moe/ygjuo5.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture></video><div class="introshade"></div><div class="neb"></div><div class="bh" id="bh"><b class="bhb"></b><i class="bhc"></i></div><div class="ie">K71LKT-A • HK I 2026–2027</div><h2 id="it"></h2><div class="ic" id="ic"></div><div class="ih">Chạm để bắt đầu 🎧</div><div class="ldw wait" id="ldw"><small id="ldt">CHẠM ĐỂ BẮT ĐẦU</small><div class="ldn"><b id="ldp">0</b><span>%</span></div><div class="ldb"><i id="ldf"></i></div></div></div>
 <button id="snd" aria-label="Bật/tắt nhạc"><svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/><path class="sl" d="M3 3l18 18"/></svg></button>
 <div class="wrap">
 <div id="home">
@@ -501,7 +502,7 @@ let AC=null,mG,sG,soundOn=true,timer=null,nextT=0,step=0;
 try{soundOn=localStorage.getItem("dd_sound")!=="0"}catch(e){}
 const mtof=m=>440*Math.pow(2,(m-69)/12);
 function initAudio(){if(AC)return;AC=new(window.AudioContext||window.webkitAudioContext)();mG=AC.createGain();sG=AC.createGain();mG.connect(AC.destination);sG.connect(AC.destination);applySound()}
-function applySound(){if(typeof bgm!=="undefined"&&bgm)bgm.muted=!soundOn;if(!AC)return;mG.gain.setTargetAtTime(soundOn?.55:0,AC.currentTime,.05);sG.gain.setTargetAtTime(soundOn?.7:0,AC.currentTime,.05);snd.classList.toggle("off",!soundOn)}
+function applySound(){if(typeof bgm!=="undefined"&&bgm)bgm.muted=!soundOn;if(typeof ldAud!=="undefined"&&ldAud)ldAud.muted=!soundOn;if(!AC)return;mG.gain.setTargetAtTime(soundOn?.55:0,AC.currentTime,.05);sG.gain.setTargetAtTime(soundOn?.7:0,AC.currentTime,.05);snd.classList.toggle("off",!soundOn)}
 function tone(dest,type,f,t,a,d,v,fe){const o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.setValueAtTime(f,t);if(fe)o.frequency.exponentialRampToValueAtTime(fe,t+a+d);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v,t+a);g.gain.exponentialRampToValueAtTime(.0001,t+a+d);o.connect(g);g.connect(dest);o.start(t);o.stop(t+a+d+.05)}
 function noise(dest,t,d,v,hp){const n=Math.floor(AC.sampleRate*d),b=AC.createBuffer(1,n,AC.sampleRate),x=b.getChannelData(0);for(let i=0;i<n;i++)x[i]=Math.random()*2-1;const s2=AC.createBufferSource(),fl=AC.createBiquadFilter(),g=AC.createGain();s2.buffer=b;fl.type="highpass";fl.frequency.value=hp;g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);s2.connect(fl);fl.connect(g);g.connect(dest);s2.start(t)}
 function swoosh(f0,f1,d,v,t){const n=Math.floor(AC.sampleRate*d),b=AC.createBuffer(1,n,AC.sampleRate),x=b.getChannelData(0);for(let i=0;i<n;i++)x[i]=Math.random()*2-1;
@@ -572,13 +573,20 @@ snd.onclick=()=>{initAudio();soundOn=!soundOn;try{localStorage.setItem("dd_sound
 "LỊCH THI".split("").forEach((ch,i)=>{const sp=document.createElement("span");sp.textContent=ch===" "?"\u00a0":ch;sp.style.animationDelay=(.3+i*.09)+"s";it.appendChild(sp)});
 (()=>{const ex=days.filter(d=>d.exam&&d.date>=todayS)[0];
   if(ex){const n=Math.round((new Date(ex.date+"T00:00:00")-new Date(todayS+"T00:00:00"))/864e5);ic.textContent=n===0?"⏰ Hôm nay có thi!":"⏳ Môn thi kế tiếp còn "+n+" ngày"}else ic.textContent="🎉 Chúc bạn thi tốt!"})();
-let ldReady=false;
-(()=>{const t0=performance.now(),D=3000;
+/* âm thanh màn hình tải: chỉ lấy 3,5 giây đầu */
+var ldAud=new Audio("https://files.catbox.moe/4emkvp.mp3"),ldCut=3.5,ldStarted=false;
+ldAud.preload="auto";ldAud.volume=.85;ldAud.muted=!soundOn;
+function ldPlay(){if(ldStarted||ldReady||!soundOn)return;ldAud.currentTime=0;const pr=ldAud.play();
+ if(pr&&pr.then)pr.then(()=>{ldStarted=true}).catch(()=>{});else ldStarted=true}
+ldAud.addEventListener("timeupdate",()=>{const t=ldAud.currentTime;
+ if(t>=ldCut){ldAud.pause()}else if(t>ldCut-.5){ldAud.volume=Math.max(0,(ldCut-t)/.5*.85)}});
+var ldReady=false;
+var ldBegun=false;function ldBegin(){ldBegun=true;ldt.textContent="ĐANG TẢI";ldw.classList.remove("wait");ldPlay();const t0=performance.now(),D=3000;
  function f(now){const k=Math.min(1,(now-t0)/D),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2,v=Math.round(e*100);
   ldp.textContent=v;ldf.style.width=v+"%";
   if(k<1)requestAnimationFrame(f);else{ldReady=true;ldw.classList.add("done");ldt.textContent="SẴN SÀNG"}}
- requestAnimationFrame(f)})();
-intro.onclick=()=>{if(!ldReady)return;initAudio();AC.resume();applySound();rev();if(soundOn)startMusic();intro.classList.add("go");setTimeout(()=>intro.remove(),1000)};
+ requestAnimationFrame(f)}
+intro.onclick=()=>{if(!ldBegun){ldBegin();return}if(!ldReady)return;try{ldAud.pause()}catch(e){}initAudio();AC.resume();applySound();rev();if(soundOn)startMusic();intro.classList.add("go");setTimeout(()=>intro.remove(),1000)};
 snd.classList.toggle("off",!soundOn);
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
